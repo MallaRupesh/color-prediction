@@ -76,7 +76,7 @@ def final_func( number_of_colors):
 
 	        clf1.fit(img_lis[i])
 	    # predicting for single image 
-	    labels=clf.predict(img_lis[0])
+	    labels=clf1.predict(img_lis[0])
 	    for i in range (0, len(img_lis)):
 	        if i ==0:
 	            labels=clf1.predict(img_lis[i])
