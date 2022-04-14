@@ -5,21 +5,14 @@ import re
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from collections import defaultdict
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
-from PIL import Image
-import seaborn as sns
-import string
-import plotly.figure_factory as ff
-import random
-from tqdm.autonotebook import tqdm
+
+
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
-import numpy as np
+
 import cv2
 from collections import Counter
-from skimage.color import rgb2lab, deltaE_cie76
+
 import os
 
 # %matplotlib inline
