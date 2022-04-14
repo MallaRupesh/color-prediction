@@ -5,7 +5,7 @@ import re
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-
+from PIL import Image
 
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
@@ -15,68 +15,52 @@ from collections import Counter
 
 import os
 
+import cv2
+
+
 # %matplotlib inline
 f = st.file_uploader("Upload file")
-print(f)
-tfile = tempfile.NamedTemporaryFile(delete=False)
-tfile.write(f.read())
-vf = cv.VideoCapture(tfile.name)
-
-# vidcap = cv2.VideoCapture(tfile.name)
-# def getFrame(sec):
-#     vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-#     hasFrames,image = vidcap.read()
-#     if hasFrames:
-#         cv2.imwrite("/image"+str(count)+".jpg", image)     # save frame as JPG file
-#     return hasFrames
-# sec = 0
-# frameRate = 0.5 #//it will capture image in each 0.5 second
-# count=1
-# success = getFrame(sec)
-# while success:
-#     count = count + 1
-#     sec = sec + frameRate
-#     sec = round(sec, 2)
-#     success = getFrame(sec)
-    
-# x=sec/0.5
-
-# print("done")
-
-def final_func(video_path , number_of_colors):
-
-	def RGB2HEX(color):
-	    return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
-
-	def get_image(image_path):
+# print(f)
+# tfile = tempfile.NamedTemporaryFile(delete=False)
+# tfile.write(f.read())
+# vf = cv.VideoCapture(tfile.name)
+video_path=f.name
+def get_image(image_path):
 	    image = cv2.imread(image_path)
 	    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	    return image
 
-	vidcap = cv2.VideoCapture(video_path)
-	def getFrame(sec):
-	    vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-	    hasFrames,image = vidcap.read()
-	    if hasFrames:
-	        cv2.imwrite("/image"+str(count)+".jpg", image)     # save frame as JPG file
-	    return hasFrames
-	sec = 0
-	frameRate = 0.5 #//it will capture image in each 0.5 second
-	count=1
-	success = getFrame(sec)
-	while success:
-	    count = count + 1
-	    sec = sec + frameRate
-	    sec = round(sec, 2)
-	    success = getFrame(sec)
-	    
-	x=sec/0.5
+vidcap = cv2.VideoCapture(video_path)
+def getFrame(sec):
+    vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
+    hasFrames,image = vidcap.read()
+    if hasFrames:
+        cv2.imwrite("image"+str(count)+".jpg", image)     # save frame as JPG file
+    return hasFrames
+sec = 0
+frameRate = 0.5 #//it will capture image in each 0.5 second
+count=1
+success = getFrame(sec)
+while success:
+    count = count + 1
+    sec = sec + frameRate
+    sec = round(sec, 2)
+    success = getFrame(sec)
+    
+x=sec/0.5
+
+def final_func( number_of_colors):
+
+	def RGB2HEX(color):
+	    return "#{:02x}{:02x}{:02x}".format(int(color[0]), int(color[1]), int(color[2]))
+
+	
 
 
 	def video_get_colors(number_of_colors):
-	    x=13
+	    
 	    img_lis=[]
-	    for i in range (0, (x)):
+	    for i in range (0, int(x)):
 	        image=cv2.imread("image"+str(i+1)+".jpg")
 	        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
@@ -123,7 +107,5 @@ def final_func(video_path , number_of_colors):
 # text1 = st.text_area('Enter number of colors :')
 number = st.number_input('Insert a number')
 # k=int(float(text1))
-st.pyplot(final_func(tfile.name,int(number)))
+st.pyplot(final_func(int(number)))
 
-
-# st.pyplot(plt)
