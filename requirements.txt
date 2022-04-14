@@ -1,5 +1,4 @@
-
-opencv-python
+opencv-python-headless
 streamlit
 pandas>=0.19
 numpy>=1.9.2
